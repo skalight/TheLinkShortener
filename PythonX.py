@@ -96,7 +96,7 @@ async def help(_, message):
 async def key(_, message):
   Key = message.text.split(" ")
   if len(Key) == 1:
-    message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /key <ᴀᴘɪ ᴋᴇʏ>")
+    await message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /key <ᴀᴘɪ ᴋᴇʏ>")
     return
   global USERS_API
   USERS_API[message.chat.id]["API_KEY"] = Key[1]
@@ -107,7 +107,7 @@ async def key(_, message):
 async def url(_, message):
   Url = message.text.split(" ")
   if len(Url) == 1:
-    message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /url <ᴀᴘɪ ᴜʀʟ>")
+    await message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /url <ᴀᴘɪ ᴜʀʟ>")
     return
   global USERS_API
   USERS_API[message.chat.id]["API_URL"] = Url[1]
