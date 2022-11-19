@@ -94,12 +94,22 @@ async def help(_, message):
 
 @Altron.on_message(filters.command('key') & filters.private)
 async def key(_, message):
+  Key = message.text.split(" ")
+  if len(Key) == 0:
+    message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /key <ᴀᴘɪ ᴋᴇʏ>")
+    return
+  global USERS_API
   USERS_API[message.chat.id]["API_KEY"] = message.text[5:]
   await message.reply_text("» ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴀᴘɪ ᴋᴇʏ ʜᴀꜱ ʙᴇɴ ꜱᴇᴛᴇᴅ.")
 
 
 @Altron.on_message(filters.command('url') & filters.private)
 async def url(_, message):
+  Url = message.text.split(" ")
+  if len(Url) == 0:
+    message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /url <ᴀᴘɪ ᴜʀʟ>")
+    return
+  global USERS_API
   USERS_API[message.chat.id]["API_URL"] = message.text[5:]
   await message.reply_text("» ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴀᴘɪ ᴜʀʟ ʜᴀꜱ ʙᴇɴ ꜱᴇᴛᴇᴅ.")
 
@@ -114,19 +124,19 @@ async def link_handler(_, message):
     for link in links:
         try:
             short_link = await get_shortlink(link, message.chat.id)
-            await message.reply(f"» ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ꜱʜᴏʀᴛᴇɴᴇᴅ ʟɪɴᴋ\n\n**ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ:** {link}\n*ꜱʜᴏʀᴛᴇɴᴇᴅ ʟɪɴᴋ:** `{short_link}`", quote=True, disable_web_page_preview=True)
+            await message.reply(f"» ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ꜱʜᴏʀᴛᴇɴᴇᴅ ʟɪɴᴋ\n\n**ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ:** {link}\n**ꜱʜᴏʀᴛᴇɴᴇᴅ ʟɪɴᴋ:** `{short_link}`", quote=True, disable_web_page_preview=True)
         except Exception as e:
             await message.reply(f'ᴇʀʀᴏʀ: `{e}`', quote=True)
 
 
 async def get_shortlink(link, ID):
     url = USERS_API[ID]["API_URL"]
+    print(USERS_API)
     params = {'api': USERS_API[ID]["API_KEY"], 'url': link}
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
             return data["shortenedUrl"]
-
 
 Altron.run()
