@@ -1,0 +1,26 @@
+{
+    "name": "The Link Shortener Bot",
+    "description": "Make short link by different API Keys",
+    "keywords": [
+    "telegram",
+    "short link",
+	"GPLink",
+	"Droplink",
+	"Dulink",
+	"Tnlink",
+	"pdisklinkshortener"
+    ],
+    "addons": [],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "stack": "heroku-22"
+}
