@@ -95,22 +95,22 @@ async def help(_, message):
 @Altron.on_message(filters.command('key') & filters.private)
 async def key(_, message):
   Key = message.text.split(" ")
-  if len(Key) == 0:
+  if len(Key) == 1:
     message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /key <ᴀᴘɪ ᴋᴇʏ>")
     return
   global USERS_API
-  USERS_API[message.chat.id]["API_KEY"] = message.text[5:]
+  USERS_API[message.chat.id]["API_KEY"] = Key[1]
   await message.reply_text("» ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴀᴘɪ ᴋᴇʏ ʜᴀꜱ ʙᴇɴ ꜱᴇᴛᴇᴅ.")
 
 
 @Altron.on_message(filters.command('url') & filters.private)
 async def url(_, message):
   Url = message.text.split(" ")
-  if len(Url) == 0:
+  if len(Url) == 1:
     message.reply_text("» 𝗨𝘀𝗮𝗴𝗲: /url <ᴀᴘɪ ᴜʀʟ>")
     return
   global USERS_API
-  USERS_API[message.chat.id]["API_URL"] = message.text[5:]
+  USERS_API[message.chat.id]["API_URL"] = Url[1]
   await message.reply_text("» ʏᴏᴜʀ ᴄᴜꜱᴛᴏᴍ ᴀᴘɪ ᴜʀʟ ʜᴀꜱ ʙᴇɴ ꜱᴇᴛᴇᴅ.")
 
 
@@ -131,8 +131,8 @@ async def link_handler(_, message):
 
 async def get_shortlink(link, ID):
     url = USERS_API[ID]["API_URL"]
-    print(USERS_API)
     params = {'api': USERS_API[ID]["API_KEY"], 'url': link}
+    print(url, params)
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
