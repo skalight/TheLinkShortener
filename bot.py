@@ -6,7 +6,7 @@ import aiohttp
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-BOT_TOKEN = "5872061153:AAG94E59a4QQYiFAwNbw9hZvUD7JAS-KKtI"
+BOT_TOKEN = "5743107971:AAHmMHuKUyBCRRSGlIeYMdnwzOz_LFrnmFY"
 USERS_API = {}
 
 Altron = Client('XShortener',
